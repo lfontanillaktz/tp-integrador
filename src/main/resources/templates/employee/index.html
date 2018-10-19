@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="gr__getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/img/kinexo.png}">
+
+    <title>Empleados</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-glyphicons.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+<body data-gr-c-s-loaded="true">
+
+<!-- Header -->
+<div th:replace="/fragments/header :: header"> </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/fragments/sidebar :: sidebar"> </div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
+            <br/>
+
+            <div class="alert alert-success fade show" role="alert" th:if="${successMessage}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Exito!  </strong><span th:text="${successMessage}"></span>
+            </div>
+
+            <div class="alert alert-danger fade show" role="alert" th:if="${errorMessage}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Ups Error!  </strong><span th:text="${errorMessage}"></span>
+            </div>
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Empleados</h1>
+                <div class="btn-toolbar mb-1 mb-md-0">
+                    <div class="btn-group mr-1">
+                        <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#createModal">Nuevo empleado</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Seniority</th>
+                        <th>Proyecto</th>
+                        <th data-field="glyphicons">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.id}"></td>
+                        <td th:text="${employee.name}"></td>
+                        <td th:text="${employee.lastName}"></td>
+                        <td th:text="${employee.seniority.description}"></td>
+                        <td th:text="${employee.project.name}"></td>
+                        <td>
+                            <a href="#"><span class="glyphicon glyphicon-edit open-editemployeedialog" data-toggle="modal"  th:attr="data-id=${employee.id}, data-name=${employee.name}, data-lastname=${employee.lastName}, data-seniority=${employee.seniority}, data-projectid=${employee.project.id}"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-trash open-deleteemployeedialog" data-toggle="modal" th:attr="data-id=${employee.id}"></span></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- Modals -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="#" th:action="@{/employee/delete}" method="post">
+
+                <input type="hidden" name="employeeId" id="employeeIdDeleteModal"/>
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Esta acción requiere confirmación!</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Esta seguro que desea eliminar el empleado?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="#" th:action="@{/employee/edit}" method="post">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edición de empleado</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="employeeIdEditModal" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="employeeIdEditModal" name="employeeId" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeNameEditModal" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="employeeNameEditModal" name="name" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeLastNameEditModal" class="col-form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="employeeLastNameEditModal" name="lastName" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeSeniorityEditModal" class="col-form-label">Seniority:</label>
+                        <select class="form-control" id="employeeSeniorityEditModal" name="seniority">
+                            <option th:each="state : ${T(com.kaitzen.utils.Seniority).values()}" th:value="${state}" th:text="${state.description}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeProjectEditModal" class="col-form-label">Proyecto:</label>
+                        <select class="form-control" id="employeeProjectEditModal" name="projectId">
+                            <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="#" th:action="@{/employee/new}" method="post">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Creación de empleado</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="employeeNameNewModal" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="employeeNameNewModal" name="name" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeLastNameNewModal" class="col-form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="employeeLastNameNewModal" name="lastName" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeSeniorityNewModal" class="col-form-label">Seniority:</label>
+                        <select class="form-control" id="employeeSeniorityNewModal" name="seniority">
+                            <option th:each="state : ${T(com.kaitzen.utils.Seniority).values()}" th:value="${state}" th:text="${state.description}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeProjectNewModal" class="col-form-label">Proyecto:</label>
+                        <select class="form-control" id="employeeProjectNewModal" name="projectId">
+                            <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Crear</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script th:src="@{/js/feather.min.js}"></script>
+
+<script th:src="@{/js/views/employee/global.js}"></script>
+
+<script>
+    feather.replace()
+</script>
+
+</body></html>
