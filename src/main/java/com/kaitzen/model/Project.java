@@ -53,4 +53,15 @@ public class Project {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate=" + startDate +
+                ", client=" + client +
+                ", employees=" + employees +
+                '}';
+    }
 }
