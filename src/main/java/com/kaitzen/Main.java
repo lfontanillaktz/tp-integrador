@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.kaitzen"})
+//@ComponentScan(basePackages = {"com.kaitzen"})
 @EnableJpaAuditing
 public class Main {
 
