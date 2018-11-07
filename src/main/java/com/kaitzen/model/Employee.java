@@ -23,10 +23,10 @@ public class Employee {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "NOMBRE", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "LAST_NAME", nullable = false, length = 50)
+    @Column(name = "APELLIDO", nullable = false, length = 50)
     private String lastName;
 
     @Enumerated(EnumType.STRING)
@@ -37,13 +37,13 @@ public class Employee {
     @JoinColumn(name = "ID_PROYECTO")
     private Project project;
 
-    public Employee() {}
-
     public Employee(String name, String lastName, Seniority seniority) {
         this.name = name;
         this.lastName = lastName;
         this.seniority = seniority;
     }
+
+    public Employee(){};
 
     public Employee(String name, String lastName, Seniority seniority, Project project) {
         this.name = name;
@@ -93,7 +93,7 @@ public class Employee {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         StringBuffer str = new StringBuffer();
         str.append("Id: ");
         str.append(id);

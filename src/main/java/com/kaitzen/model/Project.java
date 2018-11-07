@@ -1,5 +1,6 @@
 package com.kaitzen.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,12 +22,12 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Long id;
+    private long id;
 
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "NOMBRE", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "FECHA_DE_INICIO")
+    @Column(name = "FECHA_INICIO")
     private Date startDate;
 
     @OneToOne
@@ -36,12 +37,8 @@ public class Project {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
     private List<Employee> employees;
 
-    public Project() {}
 
-    public Project(String name, Date startDate) {
-        this.name = name;
-        this.startDate = startDate;
-    }
+    public Project(){};
 
     public Project(String name, Date startDate, Client client) {
         this.name = name;
@@ -56,11 +53,11 @@ public class Project {
         this.employees = employees;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
