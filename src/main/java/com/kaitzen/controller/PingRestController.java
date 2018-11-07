@@ -10,5 +10,4 @@ public class PingRestController {
     public String ping() {
         return "pong";
     }
-
 }
