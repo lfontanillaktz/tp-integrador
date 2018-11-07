@@ -1,6 +1,8 @@
 package com.kaitzen.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class Project {
     private String name;
 
     @Column(name = "FECHAINICIO")
-    private Date startDate;
+    private LocalDate startDate;
 
     @OneToOne
     @JoinColumn(name = "ID_CLIENTE")
@@ -28,6 +30,18 @@ public class Project {
 
     public Project() {
 
+    }
+
+    public Project(String name) {
+        this.name = name;
+        employees = new ArrayList<Employee>();
+        startDate = LocalDate.now();
+    }
+
+    public Project(String name, LocalDate startDate) {
+        this.name = name;
+        employees = new ArrayList<Employee>();
+        this.startDate = startDate;
     }
 
     public Long getId() {
@@ -46,12 +60,20 @@ public class Project {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override
@@ -61,7 +83,6 @@ public class Project {
                 ", name='" + name + '\'' +
                 ", startDate=" + startDate +
                 ", client=" + client +
-                ", employees=" + employees +
                 '}';
     }
 }

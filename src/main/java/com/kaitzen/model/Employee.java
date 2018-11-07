@@ -31,6 +31,12 @@ public class Employee {
 
     }
 
+    public Employee(String name, String lastName, Seniority seniority) {
+        this.name = name;
+        this.lastName = lastName;
+        this.seniority = seniority;
+    }
+
     public Long getId() {
         return id;
     }
@@ -53,6 +59,14 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @Override

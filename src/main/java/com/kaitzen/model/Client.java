@@ -14,6 +14,9 @@ public class Client {
     @Column(name = "NOMBRE",nullable = false, length = 50)
     private String name;
 
+    public Client() {
+    }
+
     public Client(String name) {
         this.name = name;
     }
