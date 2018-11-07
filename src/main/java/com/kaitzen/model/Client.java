@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
+// spring
 @Entity
 @Table(name = "CLIENTE")
 public class Client {
