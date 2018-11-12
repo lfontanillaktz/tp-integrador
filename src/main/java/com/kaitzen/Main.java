@@ -36,9 +36,7 @@ public class Main {
        //inserta en la base raul
         Client client1 = new Client("raul");
         clientRepository.save(client1);
-        //levanta de la base raul
-        List<Client> clientRta = clientRepository.findAllByName("raul");
-        System.out.println(clientRta.get(0).getName());
+
         //crea cliente franco
         Client client2 = new Client("franco");
         clientRepository.save(client2);
@@ -58,6 +56,21 @@ public class Main {
         employee2.setProject(project1);
         employeeRepository.save(employee1);
         employeeRepository.save(employee2);
+
+        //levanta de la base raul
+        System.out.println("**************************** RTAS ************************************");
+        List<Client> clientRta = clientRepository.findAllByName("raul");
+        System.out.println(clientRta.get(0).getName());
+
+        //levanta proyecto1 con hql
+        Project projectRta = projectRepository.findProjectByStartDateIsBetweenQueryHQL(new Date(10,9,10), new Date(10,12,10));
+        System.out.println(projectRta.getName());
+
+        //levanta proyecto1 con sql
+        Project projectRta2=projectRepository.findProjectByStartDateIsBetweenQuerySQL(new Date(10,9,10),new Date(10,12,10));
+        System.out.println(projectRta2.getName());
+        System.out.println("**************************** FIN RTAS ************************************");
+
         return null;
     }
 

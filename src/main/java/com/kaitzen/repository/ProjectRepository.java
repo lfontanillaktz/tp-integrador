@@ -18,4 +18,11 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
     List<Project> findAllByClient(Client client);
     List<Project> findAllByEmployees(Employee employee);
 
+    @Query("select p from Project p where p.startDate between ?1 and ?2")
+    Project findProjectByStartDateIsBetweenQueryHQL(Date stDate, Date edDate);
+
+    @Query(value="SELECT * FROM proyecto WHERE FECHA_INICIO BETWEEN :stDate AND :edDate", nativeQuery = true)
+    Project findProjectByStartDateIsBetweenQuerySQL(@Param("stDate") Date stDate, @Param("edDate") Date edDate);
+
+
 }
