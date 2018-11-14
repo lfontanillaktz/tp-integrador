@@ -36,4 +36,14 @@ public class Client {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer str = new StringBuffer();
+        str.append("Id: ");
+        str.append(id);
+        str.append(" Nombre: ");
+        str.append(name);
+        return str.toString();
+    }
 }

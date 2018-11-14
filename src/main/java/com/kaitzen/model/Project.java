@@ -3,6 +3,7 @@ package com.kaitzen.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "PROYECTO")
@@ -82,5 +83,20 @@ public class Project {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
-    
+
+    @Override
+    public String toString() {
+        StringBuffer str = new StringBuffer();
+        str.append("Id: ");
+        str.append(id);
+        str.append(" Nombre: ");
+        str.append(name);
+        str.append(" Fecha de Inicio: ");
+        str.append(startDate.toString());
+        if (Objects.nonNull(client)) {
+            str.append(" Cliente: ");
+            str.append(client.toString());
+        }
+        return str.toString();
+    }
 }

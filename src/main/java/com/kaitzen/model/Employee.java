@@ -3,6 +3,7 @@ package com.kaitzen.model;
 import com.kaitzen.utils.Seniority;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "EMPLEADO")
@@ -75,5 +76,23 @@ public class Employee {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer str = new StringBuffer();
+        str.append("Id: ");
+        str.append(id);
+        str.append(" Nombre: ");
+        str.append(name);
+        str.append(" Apellido: ");
+        str.append(lastName);
+        str.append(" Seniority: ");
+        str.append(seniority.name());
+        str.append(" Proyecto: ");
+        if (Objects.nonNull(project)) {
+            str.append(project.toString());
+        }
+        return str.toString();
     }
 }
