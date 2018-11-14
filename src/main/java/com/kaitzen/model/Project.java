@@ -67,6 +67,13 @@ public class Project {
         this.startDate = startDate;
     }
 
+    @Override
+    public String toString() {
+        return "Project{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     public Project(){}
 
     public Project(String name, Date startDate, Client client, List<Employee> employees) {
