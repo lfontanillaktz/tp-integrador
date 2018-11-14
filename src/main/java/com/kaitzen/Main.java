@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.kaitzen"})
+//@ComponentScan(basePackages = {"com.kaitzen"})
 @EnableJpaAuditing
 public class Main {
 
@@ -79,7 +79,17 @@ public class Main {
             System.out.println(project.getId()+": "+project.getName());
         }*/
 
-        List<Project> projectos = projectRepository.findProjectByStartDateBetweenQuerySQL(date1,date2);
+        List<Project> projectos = projectRepository.findProjectByStartDateBetweenQueryHQL(date1,date2);
+        for(Project project : projectos){
+            System.out.println(project.getId()+": "+project.getName());
+        }
+
+        projectos = projectRepository.findProjectByStartDateBetweenQuerySQL(date1,date2);
+        for(Project project : projectos){
+            System.out.println(project.getId()+": "+project.getName());
+        }
+
+        projectos = projectRepository.findByStartDateBetween(date1,date2);
         for(Project project : projectos){
             System.out.println(project.getId()+": "+project.getName());
         }
