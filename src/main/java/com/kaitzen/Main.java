@@ -31,10 +31,10 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Bean
+   /* @Bean
     ApplicationRunner run(ClientRepository clientRepository, ProjectRepository projectRepository, EmployeeRepository employeeRepository) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);*/
 
         /*Client client_1 = new Client("Guille");
         clientRepository.save(client_1);
@@ -72,14 +72,14 @@ public class Main {
         Client cliente = clientRepository.findClientByNameQueryHQL("Carla");
 
         System.out.println(cliente.getName());*/
-        Date date1 = sdf.parse("10-03-2018");
-        Date date2 = sdf.parse("10-05-2018");
+        /*Date date1 = sdf.parse("10-03-2018");
+        Date date2 = sdf.parse("10-05-2018");*/
         /*List<Project> projectos = projectRepository.findByStartDateBetween(date1,date2);
         for(Project project : projectos){
             System.out.println(project.getId()+": "+project.getName());
         }*/
 
-        List<Project> projectos = projectRepository.findProjectByStartDateBetweenQueryHQL(date1,date2);
+       /* List<Project> projectos = projectRepository.findProjectByStartDateBetweenQueryHQL(date1,date2);
         for(Project project : projectos){
             System.out.println(project.getId()+": "+project.getName());
         }
@@ -95,6 +95,6 @@ public class Main {
         }
 
         return null;
-    }
+    }*/
 
 }
