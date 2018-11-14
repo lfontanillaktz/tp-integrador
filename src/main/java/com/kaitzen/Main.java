@@ -30,7 +30,7 @@ public class Main {
 
 
     }
-
+/*
     @Bean
     ApplicationRunner run(ClientRepository clientRepository, EmployeeRepository employeeRepository, ProjectRepository projectRepository){
        //inserta en la base raul
@@ -62,6 +62,10 @@ public class Main {
         List<Client> clientRta = clientRepository.findAllByName("raul");
         System.out.println(clientRta.get(0).getName());
 
+        List<Project> projectoRta1 = projectRepository.findAllByEmployees(employee1);
+        System.out.println(employee1.getName()+" trabaja en el proyecto "+projectoRta1.get(0).getName());
+
+
         //levanta proyecto1 con hql
         Project projectRta = projectRepository.findProjectByStartDateIsBetweenQueryHQL(new Date(10,9,10), new Date(10,12,10));
         System.out.println(projectRta.getName());
@@ -73,5 +77,5 @@ public class Main {
 
         return null;
     }
-
+*/
 }

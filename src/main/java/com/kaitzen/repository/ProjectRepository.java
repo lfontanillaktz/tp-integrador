@@ -24,5 +24,4 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
     @Query(value="SELECT * FROM proyecto WHERE FECHA_INICIO BETWEEN :stDate AND :edDate", nativeQuery = true)
     Project findProjectByStartDateIsBetweenQuerySQL(@Param("stDate") Date stDate, @Param("edDate") Date edDate);
 
-
 }
