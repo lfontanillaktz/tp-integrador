@@ -8,7 +8,7 @@ public class PingRestController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "pong";
+        return "pang";
     }
 
 }

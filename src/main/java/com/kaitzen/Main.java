@@ -1,5 +1,6 @@
 package com.kaitzen;
 
+import com.kaitzen.controller.PingRestController;
 import com.kaitzen.model.Client;
 import com.kaitzen.model.Project;
 import com.kaitzen.repository.ClientRepository;
@@ -9,6 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.text.DateFormat;
@@ -22,7 +24,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-//@ComponentScan(basePackages = {"com.kaitzen"})
+@ComponentScan(basePackages = {"com.kaitzen"})
 @EnableJpaAuditing
 public class Main {
 
@@ -36,7 +38,7 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Bean
+    /*@Bean //Creacion a de nuevas cosas
     ApplicationRunner run(ProjectRepository projectRepository) throws ParseException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -60,18 +62,18 @@ public class Main {
         project3.setStartDate(date3);
         projectRepository.save(project3);
 
-        Date dateFrom = formatter.parse("09-12-2018");
+        *//*Date dateFrom = formatter.parse("09-12-2018");
         Date dateTo = formatter.parse("20-12-2018");
         //List<Project> projects = repository.findProjectsByStartDateIsBetween(dateFrom, dateTo);
         //List<Project> projects = repository.findProjectsByStartDateIsBetweenQueryHQL(dateFrom, dateTo);
         List<Project> projects = projectRepository.findProjectsByStartDateIsBetweenQuerySQL(dateFrom, dateTo);
         for (Project project : projects) {
             System.out.println(project.toString());
-        }
+        }*//* //Ver comparacion de fechas
 
 
 
-        /*TODO para el client, al hacerlo por id, lo hacemos desde acá */
+        *//*TODO para el client, al hacerlo por id, lo hacemos desde acá *//*
         Client c = new Client();
         c.setName("PoL");
         clientRepository.save(c);
@@ -82,13 +84,13 @@ public class Main {
         System.out.println(client.toString());
 
 
-/*        return args ->
+*//*        return args ->
                 Stream.of("Lucas", "Juan", "Pablo", "Jose").forEach(
-                        name -> customerRepository.save(new Customer(name)));*/
+                        name -> customerRepository.save(new Customer(name)));*//*
 
 
         return null;
-    }
+    }*/
 
 
 
