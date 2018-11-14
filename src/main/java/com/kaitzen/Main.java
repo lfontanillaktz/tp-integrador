@@ -15,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.kaitzen"})
@@ -44,7 +45,11 @@ public class Main {
         projectRepository.save(proyect_1);
         return null;
 
+
     }
+
+
+
 
 
 }
