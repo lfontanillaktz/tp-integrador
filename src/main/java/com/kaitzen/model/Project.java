@@ -19,7 +19,7 @@ public class Project {
     private String name;
 
     @Column(name = "FECHAINICIO")
-    private LocalDate startDate;
+    private Date startDate;
 
     @OneToOne
     @JoinColumn(name = "ID_CLIENTE")
@@ -35,10 +35,10 @@ public class Project {
     public Project(String name) {
         this.name = name;
         employees = new ArrayList<Employee>();
-        startDate = LocalDate.now();
+        startDate = new Date();
     }
 
-    public Project(String name, LocalDate startDate) {
+    public Project(String name, Date startDate) {
         this.name = name;
         employees = new ArrayList<Employee>();
         this.startDate = startDate;
@@ -60,11 +60,11 @@ public class Project {
         this.name = name;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
