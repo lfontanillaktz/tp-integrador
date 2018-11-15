@@ -61,6 +61,14 @@ public class Employee {
         this.lastName = lastName;
     }
 
+    public Seniority getSeniority() {
+        return seniority;
+    }
+
+    public void setSeniority(Seniority seniority) {
+        this.seniority = seniority;
+    }
+
     public Project getProject() {
         return project;
     }
