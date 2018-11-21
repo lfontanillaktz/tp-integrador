@@ -64,11 +64,11 @@ public class Main {
         Date dateTo = formatter.parse("20-12-2018");
         //List<Project> projects = repository.findProjectsByStartDateIsBetween(dateFrom, dateTo);
         //List<Project> projects = repository.findProjectsByStartDateIsBetweenQueryHQL(dateFrom, dateTo);
-        List<Project> projects = projectRepository.findProjectsByStartDateIsBetweenQuerySQL(dateFrom, dateTo);
+        /*List<Project> projects = projectRepository.findProjectsByStartDateIsBetweenQuerySQL(dateFrom, dateTo);
         for (Project project : projects) {
             System.out.println(project.toString());
         }
-
+*/
 
 
         /*TODO para el client, al hacerlo por id, lo hacemos desde acá */
