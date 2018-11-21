@@ -16,17 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    ProjectService projectService;
 
     @GetMapping
     public String index(Model model) {
         model.addAttribute("employees", employeeService.findAll());
+        model.addAttribute("projects", projectService.findAll());
         return "/employee/index";
     }
 
-    @Autowired
-    ProjectService projectService;
     @PostMapping("/new")
     public String create(Model model, @RequestParam("name") String name, @RequestParam("lastName") String lastName, @RequestParam("seniority") Seniority seniority, @RequestParam("projectId") Long projectId){
+
         employeeService.save(null,name,lastName,seniority,projectId);
         model.addAttribute("employees", employeeService.findAll());
         return "redirect:/employee";

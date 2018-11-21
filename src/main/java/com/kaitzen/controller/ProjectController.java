@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,8 +27,8 @@ public class ProjectController {
 
     @GetMapping
     public String index(Model model){
-        List<Project> projectList = projectService.findAll();
-        model.addAttribute("projects", projectList);
+        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("clients", clientService.findAll());
         return "/project/index";
     }
 
@@ -35,11 +36,9 @@ public class ProjectController {
 
     @PostMapping("/new")
     public String create(Model model, @RequestParam("name") String name, @RequestParam("date") Date date, @RequestParam("clientId") Long clientId){
-        model.addAttribute("clients" , clientService.findAll());
-
-       // projectService.save(null,name,date,client);
-        model.addAttribute("projects", projectService.findAll());
-        return "redirect:/project";
+       projectService.save(null,name,date,clientId);
+       model.addAttribute("projects", projectService.findAll());
+       return "redirect:/project";
     }
     @PostMapping("/edit")
     public String edit(Model model, @RequestParam("projectId") Long id, @RequestParam("name") String name, @RequestParam("date") Date date, @RequestParam("client") Long clientId){
