@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -17,7 +18,10 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public void save(Long id, String name){
+    public Client create(String name){return this.save(null,name);}
+
+
+    public Client save(Long id, String name){
         Client client=null;
         if(id == null){
             client = new Client(name);
@@ -27,10 +31,17 @@ public class ClientService {
             client.setName(name);
         }
         clientRepository.save(client);
+        return client;
     }
 
 
     public void delete(Long id){
         clientRepository.deleteById(id);
+    }
+
+    //Encontrar un cliente por su ID
+    public Client findById(Long id){
+        Optional<Client> client = clientRepository.findById(id);
+        return client.isPresent() ? client.get():null;
     }
 }
