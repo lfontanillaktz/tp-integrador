@@ -24,11 +24,11 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public void create(String name, String date, Long clientId){
-        this.save(null, name, date, clientId);
+    public Project create(String name, String date, Long clientId){
+        return this.save(null, name, date, clientId);
     }
 
-    public void save(Long id, String name, String date, Long clientId){
+    public Project save(Long id, String name, String date, Long clientId){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
             Date date1 = sdf.parse(date);
@@ -45,9 +45,11 @@ public class ProjectService {
             project.setStartDate(date1);
             project.setClient(client);
             projectRepository.save(project);
+            return project;
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public Project findById(Long id){

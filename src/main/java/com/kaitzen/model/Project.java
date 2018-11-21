@@ -1,5 +1,7 @@
 package com.kaitzen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,7 @@ public class Project {
     private Client client;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    @JsonIgnore
     private List<Employee> employees;
 
     public Date getStartDate() {
@@ -64,14 +67,6 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getStartDtade() {
-        return startDate;
-    }
-
-    public void setStartDtade(Date startDtade) {
-        this.startDate = startDtade;
     }
 
     public Project(){}
