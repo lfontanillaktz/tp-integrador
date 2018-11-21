@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -38,5 +39,10 @@ public class ProjectService {
 
     public void delete(Long id) {
         projectRepository.deleteById(id);
+    }
+
+    public Project findById(Long id) {
+        Optional<Project> project = projectRepository.findById(id);
+        return project.isPresent() ? project.get() : null;
     }
 }

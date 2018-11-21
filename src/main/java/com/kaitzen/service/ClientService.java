@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -18,7 +19,7 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public void save(Long id, String name){
+    public Client save(Long id, String name){
         Client client;
         if(id==null){//cliente nuevo
             client = new Client();
@@ -26,11 +27,22 @@ public class ClientService {
             client = clientRepository.findById(id).get();
         }
         client.setName(name);
-    clientRepository.save(client);
+        clientRepository.save(client);
+        return client;
     }
 
     public void delete(Long id){
         clientRepository.deleteById(id);
     }
 
+    public Client findById(Long id){
+        Optional<Client> client = clientRepository.findById(id);
+        return client.isPresent() ? client.get() : null;
+    }
+
+    public Client create(String name){
+        Client client = new Client(name);
+        clientRepository.save(client);
+        return client;
+    }
 }
