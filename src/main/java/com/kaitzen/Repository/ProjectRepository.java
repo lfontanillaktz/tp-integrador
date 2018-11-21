@@ -1,4 +1,4 @@
-package com.kaitzen.repository;
+package com.kaitzen.Repository;
 
 import com.kaitzen.Modelos.Project;
 import org.springframework.data.jpa.repository.JpaRepository;

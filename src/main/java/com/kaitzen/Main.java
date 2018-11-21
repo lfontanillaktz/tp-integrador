@@ -2,9 +2,8 @@ package com.kaitzen;
 
 import com.kaitzen.Modelos.Client;
 import com.kaitzen.Modelos.Project;
-import com.kaitzen.repository.ClientRepository;
-import com.kaitzen.repository.ProjectRepository;
-import jdk.nashorn.internal.objects.NativeString;
+import com.kaitzen.Repository.ClientRepository;
+import com.kaitzen.Repository.ProjectRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-
+/*
 
     @Bean //solo un Bean y un run
     ApplicationRunner run(ClientRepository clientRepository, ProjectRepository projectRepository) throws ParseException {
@@ -42,7 +41,7 @@ public class Main {
         project.setName("proyecto 1");
         project.setStartDate(date);
         projectRepository.save(project);
-        */
+
 
         Date date = f.parse("11-07-2018");
         Project project = new Project();
@@ -70,4 +69,6 @@ public class Main {
 
         return null;
     }
+    */
+
 }
