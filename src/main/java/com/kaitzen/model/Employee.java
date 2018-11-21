@@ -1,5 +1,6 @@
 package com.kaitzen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kaitzen.utils.Seniority;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Employee {
     @Column(name = "JERARQUIA",nullable = false)
     private Seniority seniority;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_PROYECTO")
     private Project project;

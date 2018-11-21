@@ -23,8 +23,10 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-
-    public void save(Long id, String name, Date date, Long clientId){
+    public Project findById(Long id){
+        return projectRepository.findById(id).get();
+    }
+    public Project save(Long id, String name, Date date, Long clientId){
         Project project = null;
         if(id == null){
              project = new Project(name,date,clientRepository.findById(clientId).get(),null);
@@ -35,7 +37,9 @@ public class ProjectService {
             project.setStartDate(date);
             project.setClient(clientRepository.findById(clientId).get());
         }
+
         projectRepository.save(project);
+        return project;
     }
 
     public void delete(Long id){

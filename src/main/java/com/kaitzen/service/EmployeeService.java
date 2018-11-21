@@ -20,7 +20,11 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public void save(Long id, String name, String lastName, Seniority seniority, Long projectId){
+    public Employee findById(Long id){
+        return employeeRepository.findById(id).get();
+    }
+
+    public Employee save(Long id, String name, String lastName, Seniority seniority, Long projectId){
         Employee employee = null;
         if(id == null){
             employee = new Employee(name,lastName,seniority,projectRepository.findById(projectId).get());
@@ -32,6 +36,8 @@ public class EmployeeService {
             employee.setSeniority(seniority);
             employee.setProject(projectRepository.findById(projectId).get());
         }
+        employeeRepository.save(employee);
+        return employee;
     }
     public void delete(Long id){
         employeeRepository.deleteById(id);

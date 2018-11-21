@@ -42,7 +42,6 @@ public class ProjectController {
     }
     @PostMapping("/edit")
     public String edit(Model model, @RequestParam("projectId") Long id, @RequestParam("name") String name, @RequestParam("date") Date date, @RequestParam("client") Long clientId){
-
         projectService.save(id,name,date,clientId);
         return ":redirect:/project";
     }

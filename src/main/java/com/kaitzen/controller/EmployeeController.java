@@ -40,4 +40,10 @@ public class EmployeeController {
         model.addAttribute("employees", employeeService.findAll());
         return "redirect:/employee";
     }
+    @PostMapping("/delete")
+    public String delete(Model model, @RequestParam("EmployeeId") Long employeeId){
+        employeeService.delete(employeeId);
+        return "redirect:/employee";
+    }
+
 }
