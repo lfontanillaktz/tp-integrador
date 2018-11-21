@@ -198,6 +198,7 @@
                         <label for="employeeProjectNewModal" class="col-form-label">Proyecto:</label>
                         <select class="form-control" id="employeeProjectNewModal" name="projectId">
                             <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
+                            <!-- error aca -->
                         </select>
                     </div>
                 </div>

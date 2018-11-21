@@ -21,7 +21,7 @@ public class ClientController {
     @GetMapping
     public String index(Model model){
         List<Client> clients = clientService.findAll();
-        model.addAttribute("clients",clientService.findAll());
+        model.addAttribute("clients",clients);
         return "/client/index";
     }
 

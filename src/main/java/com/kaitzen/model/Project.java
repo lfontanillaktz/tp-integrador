@@ -57,4 +57,10 @@ public class Project {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+    public void setClient(Client client){
+        this.client=client;
+    }
+    public Client getClient(){
+        return this.client;
+    }
 }
