@@ -19,11 +19,11 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public void create(String name){
-        this.save(null, name);
+    public Client create(String name){
+        return this.save(null, name);
     }
 
-    public void save(Long id, String name){
+    public Client save(Long id, String name){
         Client client = null;
         if(id==null){
             client = new Client();
@@ -34,9 +34,16 @@ public class ClientService {
 
         client.setName(name);
         clientRepository.save(client);
+
+        return client;
     }
 
     public void delete(Long id){
         clientRepository.deleteById(id);
     }
+
+    public Client findById(Long id){
+        return clientRepository.findById(id).get();
+    }
+
 }
