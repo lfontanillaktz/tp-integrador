@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="gr__getbootstrap_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/img/kinexo.png}">
+
+    <title>Proyectos</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-glyphicons.css}" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+<body data-gr-c-s-loaded="true">
+
+<!-- Header -->
+<div th:replace="/fragments/header :: header"> </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="/fragments/sidebar :: sidebar"> </div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <br/>
+
+            <div class="alert alert-success fade show" role="alert" th:if="${successMessage}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Exito!  </strong><span th:text="${successMessage}"></span>
+            </div>
+
+            <div class="alert alert-danger fade show" role="alert" th:if="${errorMessage}">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Ups Error!  </strong><span th:text="${errorMessage}"></span>
+            </div>
+
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                <h1 class="h2">Proyectos</h1>
+                <div class="btn-toolbar mb-1 mb-md-0">
+                    <div class="btn-group mr-1">
+                        <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#createModal">Nuevo proyecto</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Fecha de inicio</th>
+                        <th>Cliente</th>
+                        <th data-field="glyphicons">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${projects}">
+                        <td th:text="${project.id}"></td>
+                        <td th:text="${project.name}"></td>
+                        <td th:text="${#dates.format(project.startDate, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${project.client.name}"></td>
+                        <td>
+                            <a href="#"><span class="glyphicon glyphicon-edit open-editprojectdialog" data-toggle="modal"  th:attr="data-id=${project.id}, data-name=${project.name}, data-date=${#dates.format(project.startDate, 'yyyy-MM-dd')} , data-clientid=${project.client.id}"></span></a>
+                            <a href="#"><span class="glyphicon glyphicon-trash open-deleteprojectdialog" data-toggle="modal" th:attr="data-id=${project.id}"></span></a>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+<!-- Modals -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="#" th:action="@{/project/delete}" method="post">
+
+                <input type="hidden" name="projectId" id="projectIdDeleteModal"/>
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Esta acción requiere confirmación!</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Esta seguro que desea eliminar el proyecto?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="#" th:action="@{/project/edit}" method="post">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Edición de projecto</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="projectIdEditModal" class="col-form-label">Id:</label>
+                        <input type="text" class="form-control" id="projectIdEditModal" name="projectId" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectNameEditModal" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="projectNameEditModal" name="name" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDateEditModal" class="col-form-label">Fecha de inicio</label>
+                        <input class="form-control" type="date" value="" id="projectDateEditModal" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectClientEditModal" class="col-form-label">Cliente:</label>
+                        <select class="form-control" id="projectClientEditModal" name="clientId">
+                            <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <form action="#" th:action="@{/project/new}" method="post">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Creación de proyecto</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="projectNameNewModal" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="projectNameNewModal" name="name" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectDateNewModal" class="col-form-label">Fecha de inicio</label>
+                        <input class="form-control" type="date" value="" id="projectDateNewModal" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectClientNewModal" class="col-form-label">Cliente:</label>
+                        <select class="form-control" id="projectClientNewModal" name="clientId">
+                            <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Crear</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script th:src="@{/js/feather.min.js}"></script>
+
+<script th:src="@{/js/views/project/global.js}"></script>
+
+<script>
+    feather.replace()
+</script>
+
+</body></html>
