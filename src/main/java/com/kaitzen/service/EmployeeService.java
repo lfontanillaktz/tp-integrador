@@ -33,6 +33,7 @@ public class EmployeeService {
             employee.setSeniority(seniority);
             employee.setProject(projectRepository.findById(projectId).get());
         }
+        employeeRepository.save(employee);
     }
     public void delete(Long id){
         employeeRepository.deleteById(id);
