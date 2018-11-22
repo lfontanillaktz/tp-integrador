@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -13,16 +14,20 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
+    public Client create(String name) {
+        return this.save(null, name);
+    }
+
     public Client save(Long id, String name) {
         Client client = null;
-        if(id == null){
+        if (id == null) {
             client = new Client();
         } else {
-            client = this.findById(id);
+            client = clientRepository.findById(id).get();
         }
         client.setName(name);
-
-        return clientRepository.save(client);
+        clientRepository.save(client);
+        return client;
     }
 
     /*
@@ -47,7 +52,8 @@ public class ClientService {
     }
 
     public Client findById(Long id) {
-        return clientRepository.findById(id).get();
+        Optional<Client> client = clientRepository.findById(id);
+        return client.isPresent() ? client.get() : null;
     }
 
     public List<Client> byName(String name) {
