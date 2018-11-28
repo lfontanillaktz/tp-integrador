@@ -33,7 +33,7 @@ public class ClientService {
             client=clientRepository.findById(id).get();
         }
         client.setName(name);
-        clientRepository.save(client);
+        client = clientRepository.save(client);
         return client;
     }
     public void delete(Long id){
