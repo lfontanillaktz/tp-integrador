@@ -41,7 +41,7 @@ public class Main {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
-
+        /*
         Project project1 = new Project();
         project1.setName("sancor");
         Date date1 = formatter.parse("10-12-2018");
@@ -62,30 +62,28 @@ public class Main {
 
         Date dateFrom = formatter.parse("09-12-2018");
         Date dateTo = formatter.parse("20-12-2018");
-        //List<Project> projects = repository.findProjectsByStartDateIsBetween(dateFrom, dateTo);
-        //List<Project> projects = repository.findProjectsByStartDateIsBetweenQueryHQL(dateFrom, dateTo);
-        /*List<Project> projects = projectRepository.findProjectsByStartDateIsBetweenQuerySQL(dateFrom, dateTo);
+        */
+
+        /*
+        List<Project> projects = repository.findProjectsByStartDateIsBetween(dateFrom, dateTo);
+        List<Project> projects = repository.findProjectsByStartDateIsBetweenQueryHQL(dateFrom, dateTo);
+        List<Project> projects = projectRepository.findProjectsByStartDateIsBetweenQuerySQL(dateFrom, dateTo);
         for (Project project : projects) {
             System.out.println(project.toString());
         }
-*/
-
+        */
 
         /*TODO para el client, al hacerlo por id, lo hacemos desde acá */
+        /*
         Client c = new Client();
         c.setName("PoL");
         clientRepository.save(c);
+        */
 
         //Client client = clientRepository.findById(1L).get();
         //Client client = clientRepository.findByIdQueryHQL(1L);
-        Client client = clientRepository.findByIdQuerySQL(1L);
-        System.out.println(client.toString());
-
-
-/*        return args ->
-                Stream.of("Lucas", "Juan", "Pablo", "Jose").forEach(
-                        name -> customerRepository.save(new Customer(name)));*/
-
+        //Client client = clientRepository.findByIdQuerySQL(1L);
+        //System.out.println(client.toString());
 
         return null;
     }

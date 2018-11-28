@@ -1,6 +1,7 @@
 package com.kaitzen.dto;
 
 public class ClientDTO {
+
     private String name;
 
     public String getName() {
