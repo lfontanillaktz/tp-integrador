@@ -2,7 +2,17 @@ package com.kaitzen.model;
 
 import com.kaitzen.utils.Seniority;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "EMPLEADO")
@@ -10,27 +20,32 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name="NAME",nullable = false, length = 50)
+    @Column(name = "NAME", nullable = false, length = 50)
     private String name;
 
-    @Column(name="LAST_NAME",nullable = false, length = 50)
+    @Column(name = "LAST_NAME", nullable = false, length = 50)
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="Seniority", nullable = false, length = 50)
+    @Column(name = "SENIORITY", nullable = false, length = 50)
     private Seniority seniority;
 
     @ManyToOne
-    @JoinColumn(name="ID_PROYECTO")
+    @JoinColumn(name = "ID_PROYECTO")
     private Project project;
 
-    public Employee() {
+    public Employee() {}
+
+    public Employee(String name, String lastName, Seniority seniority) {
+        this.name = name;
+        this.lastName = lastName;
+        this.seniority = seniority;
     }
 
-    public Employee(String name, String lastName/*, Seniority seniority, Project project*/) {
+    public Employee(String name, String lastName, Seniority seniority, Project project) {
         this.name = name;
         this.lastName = lastName;
         this.seniority = seniority;
@@ -76,4 +91,23 @@ public class Employee {
     public void setProject(Project project) {
         this.project = project;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer str = new StringBuffer();
+        str.append("Id: ");
+        str.append(id);
+        str.append(" Nombre: ");
+        str.append(name);
+        str.append(" Apellido: ");
+        str.append(lastName);
+        str.append(" Seniority: ");
+        str.append(seniority.name());
+        str.append(" Proyecto: ");
+        if (Objects.nonNull(project)) {
+            str.append(project.toString());
+        }
+        return str.toString();
+    }
+
 }
