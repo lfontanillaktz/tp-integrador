@@ -27,7 +27,7 @@ public class Main {
     }
     @Bean
     ApplicationRunner run (ClientRepository clientRepository, ProjectRepository projectRepository, EmployeeRepository employeeRepository){
-      Client client_1 = new Client(  "raul");
+     /* Client client_1 = new Client(  "raul");
        clientRepository.save(client_1);
        Client client_2 = new Client( "raula");
        clientRepository.save(client_2);
@@ -42,7 +42,7 @@ public class Main {
 
         Date unafecha= new Date();
         Project proyect_1= new Project("facturacion",unafecha,client_1);
-        projectRepository.save(proyect_1);
+        projectRepository.save(proyect_1);*/
         return null;
 
 
