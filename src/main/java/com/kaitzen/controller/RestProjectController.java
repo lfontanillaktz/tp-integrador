@@ -29,10 +29,10 @@ public class RestProjectController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Project create(@RequestBody ProjectDTO projectDTO){
-        try {
+       try {
             Project project = projectService.save(null, projectDTO.getName(), projectDTO.getDate(), projectDTO.getClientId());
             return project;
-        }catch(Exception e){
+       }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
