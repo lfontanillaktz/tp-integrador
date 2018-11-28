@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -21,7 +22,16 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public void save(Long id, String name, String lastName, Seniority seniority, Long projectId){
+    public Employee findById(Long id){
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if(employee.isPresent()){
+            return employee.get();
+        }
+        else return null;
+    }
+
+
+    public Employee save(Long id, String name, String lastName, Seniority seniority, Long projectId){
         Employee employee = null;
         if(id == null){
             employee = new Employee(name,lastName,seniority,projectRepository.findById(projectId).get());
@@ -34,6 +44,7 @@ public class EmployeeService {
             employee.setProject(projectRepository.findById(projectId).get());
         }
         employeeRepository.save(employee);
+        return employee;
     }
     public void delete(Long id){
         employeeRepository.deleteById(id);
