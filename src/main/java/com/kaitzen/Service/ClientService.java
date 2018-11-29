@@ -31,7 +31,8 @@ public class ClientService {
         }
 
         client.setName(name);
-        return clientRepository.save(client);
+        client = clientRepository.save(client);
+        return client;
     }
 
     public void delete(Long id) {

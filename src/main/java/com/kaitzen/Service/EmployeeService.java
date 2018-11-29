@@ -9,6 +9,7 @@ import com.kaitzen.utils.Seniority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -48,4 +49,25 @@ public class EmployeeService {
     public void delete (Long id){
         employeeRepository.deleteById(id);
     }
- }
+
+    public Employee findById(Long id) {
+        return employeeRepository.findById(id).get();
+    }
+/*
+    public Employee save(Long id, String name, Date startDate, Client client) {
+        Employee employee = null;
+
+        //crear
+        if(id == null){
+            employee = new Employee();
+        }
+        else{
+            employee = employeeRepository.findById(id).get();
+        }
+
+        employee.setName(name);
+       // employee.setLastName();
+        employeeRepository.save(employee);
+    }
+    */
+}

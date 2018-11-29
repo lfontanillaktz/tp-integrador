@@ -36,12 +36,20 @@ public class ProjectController {
     }
 
     @PostMapping("/new")
-    public String create(Model model, @RequestParam(value = "name") String name, @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam(value = "clientId") Long clientId){
-
-
-
+    public String create(@RequestParam(value = "name") String name, @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam(value = "clientId") Long clientId){
         projectService.save(null, name, startDate, clientId);
+        return "redirect:/project";
+    }
 
+    @PostMapping ("/edit")
+    public String edit (@RequestParam(value = "projectId") Long projectId, @RequestParam(value = "name") String name, @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam(value = "clientId") Long clientId){
+        projectService.save(projectId, name, startDate, clientId);
+        return "redirect:/project";
+    }
+
+    @PostMapping("/delete")
+    public String delete (@RequestParam(value = "projectId") Long projectId){
+        projectService.delete(projectId);
         return "redirect:/project";
     }
 }

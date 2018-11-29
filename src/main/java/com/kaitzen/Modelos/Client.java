@@ -8,7 +8,7 @@ public class Client {
     @Id //define el Primtary Key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //crea id secuenciales automaticamente
     @Column(name = "ID")
-    private long id;
+    private Long id;
 
     @Column(name = "NOMBRE",nullable = false,length = 50) //no null, solo 50 caracteres
     private String name;
@@ -18,12 +18,16 @@ public class Client {
 
     }
 
-    public Client(long id, String name) {
+    public Client(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public void setId(long id) {
+    public Client(String name) {
+        this.name = name;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -31,7 +35,7 @@ public class Client {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

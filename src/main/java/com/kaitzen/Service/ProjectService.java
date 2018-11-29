@@ -39,8 +39,9 @@ public class ProjectService {
 
         Client client = clientRepository.findById(clientId).get();
         project.setClient(client);
-
+        System.out.println("llegó");
         projectRepository.save(project);
+        System.out.println("paso");
 
     }
 
@@ -62,6 +63,10 @@ public class ProjectService {
 
         return projectRepository.save(project);
 
+    }
+
+    public void delete (Long id){
+        projectRepository.deleteById(id);
     }
 
     public Project findById(Long id) {

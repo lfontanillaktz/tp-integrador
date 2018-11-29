@@ -43,10 +43,22 @@ public class EmployeeController {
     }
 
     @PostMapping("/new")
-    public String create (Model model, @RequestParam(value = "name") String  name, @RequestParam(value = "lastName") String lastName, @RequestParam(value = "seniority")Seniority seniority, @RequestParam(value = "projectId") Long projectId){
+    public String create (@RequestParam(value = "name") String  name, @RequestParam(value = "lastName") String lastName, @RequestParam(value = "seniority")Seniority seniority, @RequestParam(value = "projectId") Long projectId){
 
         employeeService.save(null, name, lastName, seniority, projectId);
         //volvemos a la pantalla /employee
+        return "redirect:/employee";
+    }
+
+    @PostMapping ("/edit")
+    public String edit (@RequestParam (value= "name") String name, @RequestParam(value = "lastName") String lastName, @RequestParam(value = "seniority")Seniority seniority, @RequestParam(value = "projectId") Long projectId, @RequestParam(value = "employeeId") Long employeeid){
+        employeeService.save(employeeid, name, lastName, seniority, projectId);
+        return "redirect:/employee";
+    }
+
+    @PostMapping ("/delete")
+    public String delete (@RequestParam(value = "employeeId") Long employeeId){
+        employeeService.delete(employeeId);
         return "redirect:/employee";
     }
 }
