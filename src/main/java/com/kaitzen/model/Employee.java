@@ -7,13 +7,13 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "EMPLEADO")
-
 public class Employee {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column (name = "Id")
-    private Long Id;
+    private long id;
+
 
     @Column(name = "NOMBRE", nullable = false, length = 50)
     private String name;
@@ -46,11 +46,11 @@ public class Employee {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

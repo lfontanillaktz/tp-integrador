@@ -6,14 +6,12 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "CLIENTE")
-
-
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Long Id;
+    private Long id;
 
     @NotBlank
     @Column(name = "NOMBRE", nullable = false , length = 50)
@@ -25,12 +23,12 @@ public class Client {
         this.name = name;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public long getId() {
-        return Id;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

@@ -8,13 +8,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "PROYECTO")
-
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private Long Id;
+    private Long id;
 
     @Column(name = "NOMBRE", nullable = false, length = 50)
     private String name;
@@ -50,11 +49,11 @@ public class Project {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

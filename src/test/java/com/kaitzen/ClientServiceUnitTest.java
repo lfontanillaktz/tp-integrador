@@ -17,8 +17,6 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ClientServiceUnitTest {
 
-    /*Para limpiar o setear entre test y test podemos utilizar @BeforeEach*/
-
     @InjectMocks
     ClientService service;
 
@@ -51,3 +49,5 @@ public class ClientServiceUnitTest {
 
 
 }
+
+

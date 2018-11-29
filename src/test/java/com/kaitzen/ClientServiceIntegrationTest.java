@@ -80,7 +80,7 @@ public class ClientServiceIntegrationTest {
         assertEquals(client1.getId(),clients.get(0).getId());
         assertEquals(client1.getName(),clients.get(0).getName());
         assertEquals(client2.getId(),clients.get(1).getId());
-        assertEquals(client2.getId(),clients.get(1).getName());
+        assertEquals(client2.getName(),clients.get(1).getName());
     }
 
 
