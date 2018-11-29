@@ -28,7 +28,7 @@ public class RestProjectController {
         Project project = projectService.findById(id);
 
         if(project == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Project    not found");
         }
 
         return project;
