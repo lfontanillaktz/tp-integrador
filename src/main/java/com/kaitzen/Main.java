@@ -25,8 +25,8 @@ public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-/*
 
+/*
     @Bean //solo un Bean y un run
     ApplicationRunner run(ClientRepository clientRepository, ProjectRepository projectRepository) throws ParseException {
         //Client client = new Client();
@@ -35,7 +35,7 @@ public class Main {
 
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
-        /*
+        
         Date date = f.parse("07-11-2018");
         Project project = new Project();
         project.setName("proyecto 1");
@@ -43,11 +43,11 @@ public class Main {
         projectRepository.save(project);
 
 
-        Date date = f.parse("11-07-2018");
-        Project project = new Project();
-        project.setName("proyecto 1");
-        project.setStartDate(date);
-        projectRepository.save(project);
+        Date date1 = f.parse("11-07-2018");
+        Project project1 = new Project();
+        project1.setName("proyecto 1");
+        project1.setStartDate(date1);
+        projectRepository.save(project1);
 
 
 
@@ -61,14 +61,14 @@ public class Main {
         Client client2 = clientRepository.findClientByNameQuerySQL("Raul");
         System.out.println(client2.getName());
 
-        Date date1 = f.parse("05-11-2018");
+        Date date11 = f.parse("05-11-2018");
         Date date2 = f.parse("09-11-2018");
-        List<Project> projectList = projectRepository.findByStartDateBetween(date1,date2);
+        List<Project> projectList = projectRepository.findByStartDateBetween(date11,date2);
         System.out.println(projectList.get(0).getName());
 
 
         return null;
     }
-    */
-
+    
+*/
 }
